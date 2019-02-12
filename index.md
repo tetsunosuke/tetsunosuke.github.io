@@ -45,4 +45,4 @@ title: About tetsunosuke
     - ゲーム類の研修やチームビルディングへの活用
 - 学び全般
     - 即興演劇を活用した学びやアウトプットについて現在は関心が強いです
-- その他: [likes]({{ site.baseurl }}/likes/)
+- その他: [likes]({{ site.baseurl }}/likes.html)
