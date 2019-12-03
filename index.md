@@ -24,6 +24,7 @@ title: About tetsunosuke
     - アクセス解析
     - テクニカルサポート
 - 研修・ワークショップ・社内勉強会
+- 専門職（開発）の採用
 
 # 主なスキル
 - エンジニアリング・プログラミング
@@ -43,6 +44,7 @@ title: About tetsunosuke
 # 好きなこと・興味のあること
 - ボードゲームなどのアナログゲーム
     - ゲーム類の研修やチームビルディングへの活用
+    - [所有するゲーム一覧](https://docs.google.com/spreadsheets/d/1nzJ-7LDYfDFsLJ4ud7Aeq8EjoDVPi-dGPmqc-q4UIKk/edit?usp=drive_web&ouid=103336557052812655091)
 - 学び全般
     - 即興演劇を活用した学びやアウトプットについて現在は関心が強いです
 - その他: [likes]({{ site.baseurl }}/likes.html)
