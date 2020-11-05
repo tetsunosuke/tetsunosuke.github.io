@@ -8,7 +8,7 @@
         <h2>ジョブカン</h2>
         <ul>
             <li> 
-                <p>右のリンクをブックマークバーにドラッグしてください: <a href="javascript:(function() %7Bconst json%3DJSON.parse(ReactRailsUJS.findDOMNodes("div")%5B0%5D.dataset.reactProps),payment_list%3Djson.values.all_payrolls.filter(t%3D>t.display_yearmonth_on_slip>%3D"2020-01-01").reduce((t,a)%3D>(t.push(a.payment_amount),t),%5B%5D),oct_payment%3Dpayment_list.shift()%3Balert(3*oct_payment%2Bpayment_list.reduce((t,a)%3D>t%2Ba),0)%3B%7D)()%3B">ジョブカン総支給額算出</a>
+                <p>右のリンクをブックマークバーにドラッグしてください: <a href='javascript:(function() %7Bconst json%3DJSON.parse(ReactRailsUJS.findDOMNodes("div")%5B0%5D.dataset.reactProps),payment_list%3Djson.values.all_payrolls.filter(t%3D>t.display_yearmonth_on_slip>%3D"2020-01-01").reduce((t,a)%3D>(t.push(a.payment_amount),t),%5B%5D),oct_payment%3Dpayment_list.shift()%3Balert(3*oct_payment%2Bpayment_list.reduce((t,a)%3D>t%2Ba),0)%3B%7D)()%3B'>ジョブカン総支給額算出</a>
                 </p>
             </li>
         </ul>
