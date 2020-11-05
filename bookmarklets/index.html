@@ -4,5 +4,13 @@
             <li> 
                 <p>右のリンクをブックマークバーにドラッグしてください: <a href='javascript:(function(){var $thead=document.querySelector("#id_suihei_kotei_thead");var $target=document.querySelector("#id_data_table_body");var nodes=document.querySelectorAll("#getuji_scroll tbody tr td");htmlTag=document.getElementsByTagName("html");htmlTag[0].innerHTML="";var table_kyuka=document.createElement("table");var tr=document.createElement("tr");var tmp;var values=["残有給",nodes[5].textContent,"残振休",nodes[8].textContent];for(i in values){tmp=document.createElement("td");tmp.appendChild(document.createTextNode(values[i]));tr.appendChild(tmp)}table_kyuka.appendChild(tr);var table_kintai=document.createElement("table");table_kintai.appendChild(document.createElement("thead").appendChild($thead));table_kintai.appendChild($target);document.body.appendChild(table_kyuka);document.body.appendChild(table_kintai)})();'>勤労の獅子チェックデータ作成</a></p>
             </li>
+        </ul>
+        <h2>ジョブカン</h2>
+        <ul>
+            <li> 
+                <p>右のリンクをブックマークバーにドラッグしてください: <a href="javascript:(function() %7Bconst json%3DJSON.parse(ReactRailsUJS.findDOMNodes("div")%5B0%5D.dataset.reactProps),payment_list%3Djson.values.all_payrolls.filter(t%3D>t.display_yearmonth_on_slip>%3D"2020-01-01").reduce((t,a)%3D>(t.push(a.payment_amount),t),%5B%5D),oct_payment%3Dpayment_list.shift()%3Balert(3*oct_payment%2Bpayment_list.reduce((t,a)%3D>t%2Ba),0)%3B%7D)()%3B">ジョブカン総支給額算出</a>
+                </p>
+            </li>
+        </ul>
     </body>
 </html>
