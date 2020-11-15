@@ -30,8 +30,9 @@ title: About tetsunosuke
 - エンジニアリング・プログラミング
     - 言語
         - 概ね独力でこなせる: PHP/Python/JavaScript
+        - 最近ブラウザの自動化等で活用している： Node.js(Puppeteer)
         - だいぶ忘れてきたので調べながら: R/Java
-        - 言われればまあやる...C++/ActionScript3/Ruby/Node.js
+        - 言われればまあやる...C++/ActionScript3/Ruby
         - 触った程度：Go/VBなど.Net系
 - ワークショップデザイン／コーチング
     - LEGO(R) SERIOUS PLAY(R) メソッドと教材を活用したワークショップ

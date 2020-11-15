@@ -7,4 +7,4 @@ title: links
 
 - [blog](https://tetsunosuke.hatenablog.com)
 - [Qiita](https://qiita.com/tetsunosukeito)
-- [note](https://note.mu/tetsunosuke)
+- [note](https://note.com/tetsunosuke)
