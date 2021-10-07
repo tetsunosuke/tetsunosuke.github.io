@@ -15,7 +15,8 @@ header.appendChild(div);
 const json = JSON.parse(ReactRailsUJS.findDOMNodes("div")[0].dataset.reactProps);
 // 下記が交通費を抜いたやつ
 const payment_list = json.values.all_payrolls.filter(p => p.payment_date.substring(0, 4) === year).reduce( (acc, cv) => {acc.push(cv.income_tax_related_amount_exclude_no_exemption_commuting); return acc; },[]);
-const oct_payment = payment_list.shift();
+//const oct_payment = payment_list.shift();
+const oct_payment = json.values.all_payrolls.filter(p => p.payment_date.substring(0, 7) === year + "-10").reduce( (acc, cv) => { acc + cv.income_tax_related_amount_exclude_no_exemption_commuting; return acc; }, 0);
 const total = oct_payment * 3 + payment_list.reduce((acc, cv) => acc+cv, 0);
 
 // 念の為計算式を算出
