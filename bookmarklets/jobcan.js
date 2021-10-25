@@ -11,9 +11,10 @@ header.appendChild(div);
 const json = JSON.parse(ReactRailsUJS.findDOMNodes("div")[0].dataset.reactProps);
 // 下記が交通費を抜いたやつ
 const payment_list = json.values.all_payrolls.filter(p => p.payment_date.substring(0, 4) === year).reduce( (acc, cv) => {acc.push(cv.income_tax_related_amount_exclude_no_exemption_commuting); return acc; },[]);
-// 10月給与を取得し、その3倍を加算
-const oct_payment = json.values.all_payrolls.filter(p => p.payment_date.substring(0, 7) === year + "-10").reduce( (acc, cv) => { acc + cv.income_tax_related_amount_exclude_no_exemption_commuting; return acc; }, 0);
-const total = oct_payment * 3 + payment_list.reduce((acc, cv) => acc+cv, 0);
+// 10月給与を取得し、その3倍を加算したものになる
+const oct_payment = json.values.all_payrolls.filter(p => p.payment_date.substring(0, 7) === year + "-10").reduce( (acc, cv) => { acc += cv.income_tax_related_amount_exclude_no_exemption_commuting; return acc; }, 0);
+// payment_listには10月を含んでいるので10月分はあと2回加算
+const total = oct_payment * 2 + payment_list.reduce((acc, cv) => acc+cv, 0);
 
 // 計算式を算出
 // label, payment_amount
@@ -38,7 +39,11 @@ fetch("/employees/my_data/bonus").then((response) => response.text()).then((html
     const nov_bonus = (isPhotocreate ? json.values.all_bonus.filter( o => o.pay_on.substring(0,7) === year + "-04")[0].total_taxable_target_amount : 0) -0;
     const bonusTotal = bonus.reduce( (acc, cv) => { acc.push(cv.total_taxable_target_amount); return acc; },[]).reduce( (acc, cv) => acc+cv, 0) + nov_bonus;
     const bonusFormula = bonus.map( (o) => {
-        return `${o.label.trim()} = ${o.total_taxable_target_amount}`
+        if (nov_bonus > 0 && o.pay_on.substring(0,7) === year + "-04") {
+            return `${o.label.trim()} : ${o.total_taxable_target_amount} ✕ 2 = ${o.total_taxable_target_amount*2}`
+        } else {
+            return `${o.label.trim()} = ${o.total_taxable_target_amount}`
+        }
     }).join("\n");
      // 新しい要素を取得
     const innerHtml = `<h1>トータル金額：${total+bonusTotal} (${total} + ${bonusTotal})</h1>
