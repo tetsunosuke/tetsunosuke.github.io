@@ -31,12 +31,36 @@ fetch("/employees/my_data/bonus").then((response) => response.text()).then((html
     const domParser = new DOMParser();
     const doc = domParser.parseFromString(html, "text/html");
     const props = doc.querySelector("div").getAttribute("data-react-props");
+
+    
     const json = JSON.parse(props);
+    if (json.error_status === "not_found") {
+        const innerHtml = `<h1>トータル金額：${total}</h1>
+        <hr/>
+        <p>計算式です</p>
+        <div>
+        <textarea rows="15" cols="80">${formula}</textarea>
+        </div>`;
+        div.innerHTML = innerHtml;
+        return;
+    }
     // label, pay_on, total_taxable_target_amount
     // 合計金額算出
     const bonus = json.values.all_bonus.filter( o => o.pay_on.substring(0, 4) === year);
+    if (bonus.length === 0) {
+        const innerHtml = `<h1>トータル金額：${total}</h1>
+        <hr/>
+        <p>計算式です</p>
+        <div>
+        <textarea rows="15" cols="80">${formula}</textarea>
+        </div>`;
+        div.innerHTML = innerHtml;
+        return;
+    }
     // 11月賞与の見込み（フォトクリのみ)は4月分を反映
-    const nov_bonus = (isPhotocreate ? json.values.all_bonus.filter( o => o.pay_on.substring(0,7) === year + "-04")[0].total_taxable_target_amount : 0) -0;
+    //const nov_bonus = (isPhotocreate ? json.values.all_bonus.filter( o => o.pay_on.substring(0,7) === year + "-04")[0].total_taxable_target_amount : 0) -0;
+    const apr_bonus = json.values.all_bonus.filter( o => o.pay_on.substring(0,7) === year + "-04");
+    const nov_bonus = apr_bonus.length > 0 ? (isPhotocreate ? json.values.all_bonus.filter( o => o.pay_on.substring(0,7) === year + "-04")[0].total_taxable_target_amount : 0) -0: 0;
     const bonusTotal = bonus.reduce( (acc, cv) => { acc.push(cv.total_taxable_target_amount); return acc; },[]).reduce( (acc, cv) => acc+cv, 0) + nov_bonus;
     const bonusFormula = bonus.map( (o) => {
         if (nov_bonus > 0 && o.pay_on.substring(0,7) === year + "-04") {
