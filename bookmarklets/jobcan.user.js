@@ -1,10 +1,10 @@
 // ==UserScript==
-// @name         年末調整
+// @name         ジョブカンから年末調整
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
 // @author       You
-// @include         *
+// @match         https://payroll.jobcan.jp/employees/my_data/payslips
 // @exclude        file://*
 // @icon         https://www.google.com/s2/favicons?domain=nkmk.me
 // @grant        none
@@ -67,16 +67,15 @@
             return;
         }
         // 11月賞与の見込み（フォトクリのみ)は4月分を反映
-        let apr_bonus = json.values.all_bonus.filter( o => o.pay_on.substring(0,7) === year + "-04");
+        let apr_bonus = json.values.all_bonus.filter( o => o.pay_on.substring(0,7) === year + "-05");
         let apr_bonus_value = 0;
         if (apr_bonus.length > 0) {
-            apr_bonus_value = apr_bonus[0];
+            apr_bonus_value = apr_bonus[0].total_taxable_target_amount
         }
-
-        const nov_bonus = apr_bonus_value > 0 ? (isPhotocreate ? json.values.all_bonus.filter( o => o.pay_on.substring(0,7) === year + "-04")[0].total_taxable_target_amount : 0) -0: 0;
+        const nov_bonus = apr_bonus_value > 0 ? (isPhotocreate ? json.values.all_bonus.filter( o => o.pay_on.substring(0,7) === year + "-05")[0].total_taxable_target_amount : 0) -0: 0;
         const bonusTotal = bonus.reduce( (acc, cv) => { acc.push(cv.total_taxable_target_amount); return acc; },[]).reduce( (acc, cv) => acc+cv, 0) + nov_bonus;
         const bonusFormula = bonus.map( (o) => {
-            if (nov_bonus > 0 && o.pay_on.substring(0,7) === year + "-04") {
+            if (nov_bonus > 0 && o.pay_on.substring(0,7) === year + "-05") {
                 return `${o.label.trim()} : ${o.total_taxable_target_amount} ✕ 2 = ${o.total_taxable_target_amount*2}`
         } else {
             return `${o.label.trim()} = ${o.total_taxable_target_amount}`
@@ -93,4 +92,5 @@
 });
 
 })();
+
 
